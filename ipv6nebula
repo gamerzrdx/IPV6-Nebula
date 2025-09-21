@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Para ASCII Art and Header
+echo -e "\n\033[1;36m"
+cat << "EOF"
+================================================                    
+            mmmmmm    mmmmm     mmm  mmm 
+            ##""""##  ##"""##    ##mm##  
+            ##    ##  ##    ##    ####   
+            #######   ##    ##     ##    
+            ##  "##m  ##    ##    ####   
+            ##    ##  ##mmm##    ##  ##  
+            ""    """ """""     """  """ 
+                   POWERED BY RDX             
+================================================
+                      
+ 🤍 Framework Installer - github.com/ParaNoob123
+
+EOF
+echo -e "\033[0m"
+
+echo -e "\033[1;34mStarting Installation of Blueprint.zip\033[0m"
+echo "-------------------------------------"
+
+# Installation Steps
+commands=(
+  "cd"
+  "git clone https://github.com/ParaNoob123/IPV6-Nebula"
+  "mv nebula.blueprint /var/www/pterodactyl"
+  "cd /var/www/pterodactyl"
+  "blueprint -install nebula"
+)
+
+# Execute commands with progress
+for i in "${!commands[@]}"; do
+  echo -e "\033[1;33m[$((i+1))/6] Executing:\033[0m \033[0;35m${commands[$i]}\033[0m"
+  eval "${commands[$i]}"
+  if [ $? -ne 0 ]; then
+    echo -e "\033[1;31mError occurred at step $((i+1)). Aborting installation.\033[0m"
+    exit 1
+  fi
+done
+
+# Completion Message
+echo -e "\n\033[1;32m-------------------------------------\033[0m"
+echo -e "\033[1;32m Nebula IPV6 installed successfully! 🎉\033[0m"
+echo -e "\033[1;35m           Made by rdx\033[0m"
+echo -e "\033[1;35m       github.com/gamerzrdx\033[0m"
+echo -e "\033[1;32m-------------------------------------\033[0m"
